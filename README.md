@@ -4,6 +4,9 @@
 
 SimpleRAG is an educational project that demonstrates the implementation of a Retrieval-Augmented Generation (RAG) system using Streamlit and Ollama. It allows users to upload documents, process them, and then engage in a chat interface to ask questions about the content of these documents.
 
+<img width="1488" alt="SimpleRAG_ScreenShot" src="https://github.com/user-attachments/assets/2015c7a8-3c30-401f-95b0-e54182d236ad">
+
+
 ## Features
 
 - Document upload and processing (PDF, DOCX, XLSX, and plain text files)
