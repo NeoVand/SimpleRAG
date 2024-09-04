@@ -39,7 +39,7 @@ SimpleRAG is an educational project that demonstrates the implementation of a Re
 
 1. Clone the repository:
    ```
-   git clone https://github.com/NeoVand/SimpleRAG
+   git clone https://github.com/NeoVand/SimpleRAG.git
    cd SimpleRAG
    ```
 
@@ -56,7 +56,14 @@ SimpleRAG is an educational project that demonstrates the implementation of a Re
 
 4. Install and set up Ollama:
    - Follow the instructions at [Ollama's official website](https://ollama.ai/) to install Ollama on your system.
-   - Ensure Ollama is running and accessible at `http://localhost:11434` (default URL).
+   - Pull an embedding model.
+   ```
+   ollama pull paraphrase-multilingual
+   ```
+   - Pull a chat model.
+   ```
+   ollama pull llama3.1
+   ```
 
 5. Run the Streamlit app:
    ```
