@@ -1,3 +1,5 @@
+# This application is developed by Neo Mohsenvand, starting on Sep 3 2024. Claude Sonnet 3.5 was used to optimize the code. 
+
 import streamlit as st
 from streamlit_chat import message
 import os
@@ -17,7 +19,7 @@ import re
 
 
 # Set page config at the very beginning
-st.set_page_config(page_title="Document Chat", page_icon="💬", layout="wide")
+st.set_page_config(page_title="SimpleRAG", page_icon="💬", layout="wide")
 
 # Constants for initiating the interface
 DEFAULT_OLLAMA_URL = 'http://localhost:11434'
