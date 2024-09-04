@@ -401,7 +401,7 @@ def main():
 
     Note:
         This function serves as the entry point for the Streamlit application and
-        orchestrates the entire document chat experience.
+        orchestrates the entire SimpleRAG experience.
     """
     if 'ollama_url' not in st.session_state:
         st.session_state.ollama_url = DEFAULT_OLLAMA_URL
@@ -417,7 +417,7 @@ def main():
         st.session_state.summaries = {}
 
     with st.sidebar:
-        st.title("💬 Document Chat")
+        st.title("💬 SimpleRAG")
         st.header("Settings")
         
         with st.expander("🤖 Model Settings", expanded=False):
