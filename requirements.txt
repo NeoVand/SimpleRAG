@@ -1,8 +1,8 @@
-streamlit==1.31.0
+streamlit==1.38.0
 streamlit-chat==0.1.1
-chromadb==0.4.22
-requests==2.31.0
-PyPDF2==3.0.1
-python-docx==1.1.0
-openpyxl==3.1.2
+requests==2.32.3
+chromadb==0.5.5
 chardet==5.2.0
+PyPDF2==3.0.1
+python-docx==1.1.2
+openpyxl==3.1.5
