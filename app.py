@@ -98,8 +98,8 @@ def embed_documents(ollama_url: str, model: str, texts: List[str]) -> Union[List
     """
     Generate embeddings for a list of text documents using the specified Ollama model.
 
-    This function sends POST requests to the Ollama server to generate embeddings
-    for each text document in the input list.
+    This function sends a POST request to the Ollama server to generate embeddings
+    for the input documents.
 
     Args:
         ollama_url (str): The URL of the Ollama server.
@@ -111,24 +111,28 @@ def embed_documents(ollama_url: str, model: str, texts: List[str]) -> Union[List
                                         if successful, or None if there's an error.
 
     Note:
-        If there's an error generating embeddings for any document, the function will
-        display an error message in the Streamlit sidebar and return None.
+        If there's an error generating embeddings, the function will display an error
+        message in the Streamlit sidebar and return None.
     """
-    embeddings = []
-    for text in texts:
-        try:
-            response = requests.post(
-                f'{ollama_url}/api/embeddings',
-                json={'model': model, 'prompt': text},
-                timeout=30
-            )
-            response.raise_for_status()
-            embedding = response.json()['embedding']
-            embeddings.append(embedding)
-        except requests.RequestException as e:
-            st.sidebar.error(f"Error getting embedding: {str(e)}")
-            return None
-    return embeddings
+    try:
+        response = requests.post(
+            f'{ollama_url}/api/embed',
+            json={'model': model, 'input': texts},
+            timeout=30
+        )
+        response.raise_for_status()
+
+        response_json = response.json()
+        if 'embeddings' in response_json:
+            return response_json['embeddings']
+        if 'embedding' in response_json:
+            return [response_json['embedding']]
+
+        st.sidebar.error("Error getting embedding: Unexpected Ollama response format.")
+        return None
+    except requests.RequestException as e:
+        st.sidebar.error(f"Error getting embedding: {str(e)}")
+        return None
 
 def chat_with_documents(ollama_url: str, model: str, prompt: str, temperature: float):
     """
@@ -384,6 +388,8 @@ def hybrid_search(query: str, collection, documents: List[Dict[str, Union[str, D
     """
     # Embed the query
     question_embedding = embed_documents(st.session_state.ollama_url, st.session_state.embedding_model, [query])
+    if not question_embedding:
+        return []
 
     # Perform semantic search over all documents
     total_docs = len(documents)
